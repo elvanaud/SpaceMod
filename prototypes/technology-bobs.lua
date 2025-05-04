@@ -42,7 +42,7 @@ if bobmods.tech and bobmods.tech.advanced_logistic_science then
             {"automation-science-pack", 1},
             {"logistic-science-pack", 1},
             {"chemical-science-pack", 1},
-            {"advanced-logistic-science-pack", 1},
+            {"bob-advanced-logistic-science-pack", 1},
           },
           time = 60
         },
@@ -50,18 +50,18 @@ if bobmods.tech and bobmods.tech.advanced_logistic_science then
     }
   })
 
-  bobmods.lib.tech.add_science_pack("space-assembly", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("space-construction", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("space-casings", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("protection-fields", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("fusion-reactor", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("space-thrusters", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("fuel-cells", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("habitation", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("life-support-systems", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("spaceship-command", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("astrometrics", "advanced-logistic-science-pack", 1)
-  bobmods.lib.tech.add_science_pack("ftl-propulsion", "advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("space-assembly", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("space-construction", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("space-casings", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("protection-fields", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("fusion-reactor", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("space-thrusters", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("fuel-cells", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("habitation", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("life-support-systems", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("spaceship-command", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("astrometrics", "bob-advanced-logistic-science-pack", 1)
+  bobmods.lib.tech.add_science_pack("ftl-propulsion", "bob-advanced-logistic-science-pack", 1)
 
 
   data.raw.technology["ftl-theory-A"].unit.count = 200000 * researchCost
@@ -72,35 +72,35 @@ if bobmods.tech and bobmods.tech.advanced_logistic_science then
   data.raw.technology["ftl-propulsion"].unit.count = 200000 * researchCost
 
   bobmods.lib.tech.replace_prerequisite("ftl-theory-D1", "ftl-theory-C", "ftl-theory-D")
-  bobmods.lib.tech.replace_prerequisite("ftl-theory-D2", "ftl-theory-C", "ftl-theory-D")  
+  bobmods.lib.tech.replace_prerequisite("ftl-theory-D2", "ftl-theory-C", "ftl-theory-D")
 
 end
 
-bobmods.lib.tech.add_prerequisite("space-assembly", "bob-robots-3")  
+bobmods.lib.tech.add_prerequisite("space-assembly", "bob-robots-3")
 
 if bobmods.modules.EnableGodModules == true then
   bobmods.lib.tech.add_prerequisite("space-assembly", "god-module-5")
 --    data.raw.technology["space-assembly"].prerequisites = {"god-module-5","rocket-silo","bob-robots-3"}
 else
-  bobmods.lib.tech.add_prerequisite("space-assembly", "speed-module-8")
-  bobmods.lib.tech.add_prerequisite("space-assembly", "effectivity-module-8")
---    data.raw.technology["space-assembly"].prerequisites = {"speed-module-8","effectivity-module-8","rocket-silo","bob-robots-3"}
-  bobmods.lib.tech.add_prerequisite("ftl-propulsion", "productivity-module-8")
---    data.raw.technology["ftl-propulsion"].prerequisites = {"productivity-module-8","ftl-theory-D"}  
+  bobmods.lib.tech.add_prerequisite("space-assembly", "bob-speed-module-5")
+  bobmods.lib.tech.add_prerequisite("space-assembly", "bob-efficiency-module-5")
+--    data.raw.technology["space-assembly"].prerequisites = {"bob-speed-module-5","bob-efficiency-module-5","rocket-silo","bob-robots-3"}
+  bobmods.lib.tech.add_prerequisite("ftl-propulsion", "bob-productivity-module-5")
+--    data.raw.technology["ftl-propulsion"].prerequisites = {"bob-productivity-module-5","ftl-theory-D"}  
 end
 
-bobmods.lib.tech.add_prerequisite("space-construction", "bob-robo-modular-4")  
+bobmods.lib.tech.add_prerequisite("space-construction", "bob-robo-modular-4")
 -- data.raw.technology["space-construction"].prerequisites = {"space-assembly","bob-robo-modular-4"}
 bobmods.lib.tech.add_prerequisite("protection-fields", "bob-energy-shield-equipment-6")
 -- data.raw.technology["protection-fields"].prerequisites = {"space-construction","energy-shield-equipment-6"}
-bobmods.lib.tech.add_prerequisite("fusion-reactor", "fusion-reactor-equipment-4")
--- data.raw.technology["fusion-reactor"].prerequisites = {"space-construction","fusion-reactor-equipment-4"}
+bobmods.lib.tech.add_prerequisite("fusion-reactor", "bob-fission-reactor-equipment-4")
+-- data.raw.technology["fusion-reactor"].prerequisites = {"space-construction","bob-fission-reactor-equipment-4"}
 
-bobmods.lib.tech.add_prerequisite("rocket-silo", "titanium-processing")
-bobmods.lib.tech.add_prerequisite("rocket-silo", "nitinol-processing")
-bobmods.lib.tech.add_prerequisite("rocket-silo", "bob-electric-energy-accumulators-4")
-bobmods.lib.tech.add_prerequisite("rocket-silo", "bob-solar-energy-4")
-bobmods.lib.tech.add_prerequisite("rocket-silo", "advanced-electronics-3")
+bobmods.lib.tech.add_prerequisite("rocket-silo", "bob-titanium-processing")
+bobmods.lib.tech.add_prerequisite("rocket-silo", "bob-nitinol-processing")
+bobmods.lib.tech.add_prerequisite("rocket-silo", "bob-electric-energy-accumulators-3")
+bobmods.lib.tech.add_prerequisite("rocket-silo", "bob-solar-energy-3")
+bobmods.lib.tech.add_prerequisite("rocket-silo", "bob-advanced-processing-unit")
 -- bobmods.lib.tech.add_prerequisite("rocket-silo", "radars-4")
 
 -- alternate protection field recipe enabler

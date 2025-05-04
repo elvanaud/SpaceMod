@@ -41,8 +41,8 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1}
       },
       time = 60
     },
@@ -72,8 +72,8 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1}
       },
       time = 60
     },
@@ -83,14 +83,14 @@ data:extend(
     type = "technology",
     name = "space-casings",
     icon = "__SpaceMod__/graphics/technology/space-casings.png",
-	icon_size = 128,
-	effects =
-      {
+	  icon_size = 128,
+	  effects =
         {
-            type = "unlock-recipe",
-            recipe = "hull-component"
-        },
-      },	
+          {
+              type = "unlock-recipe",
+              recipe = "hull-component"
+          },
+        },	
     prerequisites = {"space-construction"},
     unit =
     {
@@ -99,8 +99,8 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1}
       },
       time = 60
     },
@@ -110,14 +110,14 @@ data:extend(
     type = "technology",
     name = "protection-fields",
     icon = "__SpaceMod__/graphics/technology/protection-fields.png",
-	icon_size = 128,
-	effects =
-      {
+	  icon_size = 128,
+	  effects =
         {
-            type = "unlock-recipe",
-            recipe = "protection-field"
-        },
-      },	
+          {
+              type = "unlock-recipe",
+              recipe = "protection-field"
+          },
+        },	
     prerequisites = {"space-construction"},
     unit =
     {
@@ -126,26 +126,26 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"military-science-pack", 1},
-		{"utility-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"military-science-pack", 1},
+		    {"utility-science-pack", 1}
       },
       time = 60
     },
-	order = "k-e"
+	  order = "k-e"
   },
   {
     type = "technology",
     name = "fusion-reactor",
     icon = "__SpaceMod__/graphics/technology/fusion-reactor.png",
-	icon_size = 128,
-	effects =
-      {
-        {
-            type = "unlock-recipe",
-            recipe = "fusion-reactor"
-        },
-      },	
+	    icon_size = 128,
+	    effects =
+          {
+            {
+                type = "unlock-recipe",
+                recipe = "fusion-reactor"
+            },
+          },	
     prerequisites = {"space-construction"},
     unit =
     {
@@ -154,14 +154,14 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"military-science-pack", 1},
-		{"production-science-pack", 1},
-		{"utility-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"military-science-pack", 1},
+		    {"production-science-pack", 1},
+		    {"utility-science-pack", 1}
       },
       time = 60
     },
-	order = "k-f"
+	  order = "k-f"
   }, 
   {
     type = "technology",
@@ -183,25 +183,25 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1}
       },
       time = 60
     },
-	order = "k-g"
+	  order = "k-g"
   },   
   {
     type = "technology",
     name = "fuel-cells",
     icon = "__SpaceMod__/graphics/technology/fuel-cells.png",
-	icon_size = 128,
-	effects =
-      {
-        {
-            type = "unlock-recipe",
-            recipe = "fuel-cell"
-        },
-      },	
+  	icon_size = 128,
+  	effects =
+       {
+         {
+             type = "unlock-recipe",
+             recipe = "fuel-cell"
+         },
+       },	
     prerequisites = {"space-construction"},
     unit =
     {
@@ -210,25 +210,25 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"utility-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"utility-science-pack", 1}
       },
       time = 60
     },
-	order = "k-h"
+	  order = "k-h"
   }, 
   {
     type = "technology",
     name = "habitation",
     icon = "__SpaceMod__/graphics/technology/habitation.png",
-	icon_size = 128,
-	effects =
-      {
+	  icon_size = 128,
+	  effects =
         {
-            type = "unlock-recipe",
-            recipe = "habitation"
-        },
-      },		
+          {
+              type = "unlock-recipe",
+              recipe = "habitation"
+          },
+        },		
     prerequisites = {"space-construction"},
     unit =
     {
@@ -237,26 +237,26 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1},
-		{"utility-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1},
+		    {"utility-science-pack", 1}
       },
       time = 60
     },
-	order = "k-i"
+	  order = "k-i"
   }, 
   {
     type = "technology",
     name = "life-support-systems",
     icon = "__SpaceMod__/graphics/technology/life-support.png",
-	icon_size = 128,
-	effects =
-      {
+	  icon_size = 128,
+	  effects =
         {
-            type = "unlock-recipe",
-            recipe = "life-support"
-        },
-      },		
+          {
+              type = "unlock-recipe",
+              recipe = "life-support"
+          },
+        },		
     prerequisites = {"space-construction"},
     unit =
     {
@@ -265,26 +265,26 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1},
-		{"utility-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1},
+		    {"utility-science-pack", 1}
       },
       time = 60
     },
-	order = "k-j"
+	  order = "k-j"
   },  
   {
     type = "technology",
     name = "spaceship-command",
     icon = "__SpaceMod__/graphics/technology/command.png",
-	icon_size = 128,
-	effects =
-      {
+	  icon_size = 128,
+	  effects =
         {
-            type = "unlock-recipe",
-            recipe = "command"
-        },
-      },		
+          {
+              type = "unlock-recipe",
+              recipe = "command"
+          },
+        },		
     prerequisites = {"space-construction"},
     unit =
     {
@@ -293,9 +293,9 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1},
-		{"utility-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1},
+		    {"utility-science-pack", 1}
       },
       time = 60
     },
@@ -305,14 +305,14 @@ data:extend(
     type = "technology",
     name = "astrometrics",
     icon = "__SpaceMod__/graphics/technology/astrometrics.png",
-	icon_size = 128,
-	effects =
-      {
+	  icon_size = 128,
+	  effects =
         {
-            type = "unlock-recipe",
-            recipe = "astrometrics"
-        },
-      },		
+          {
+              type = "unlock-recipe",
+              recipe = "astrometrics"
+          },
+        },		
     prerequisites = {"space-construction"},
     unit =
     {
@@ -321,10 +321,10 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1},
-		{"utility-science-pack", 1},
-		{"space-science-pack", 1}
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1},
+		    {"utility-science-pack", 1},
+		    {"space-science-pack", 1}
       },
       time = 60
     },
@@ -445,10 +445,10 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1},
-		{"utility-science-pack", 1},
-		{"space-science-pack", 1},
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1},
+		    {"utility-science-pack", 1},
+		    {"space-science-pack", 1},
       },
       time = 60
     },
@@ -463,8 +463,8 @@ data:extend(
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
-		{"production-science-pack", 1},
-		{"utility-science-pack", 1},
+		    {"chemical-science-pack", 1},
+		    {"production-science-pack", 1},
+		    {"utility-science-pack", 1},
       }
 end

@@ -334,5 +334,5 @@ activity_led_sprites =
     },
 
     circuit_wire_max_distance = 9
-  },  
+  },
 })

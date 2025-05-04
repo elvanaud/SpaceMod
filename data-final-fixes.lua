@@ -7,7 +7,7 @@ if (mods['boblibrary'] and
 	mods['boblogistics'] and 
 	mods['bobtech'] and 
 	mods['bobequipment'] and
-	data.raw.recipe["advanced-processing-unit"]) then
+	data.raw.recipe["bob-advanced-processing-unit"]) then
 	require("prototypes.recipe-bobs")
 	require("prototypes.technology-bobs")
 
