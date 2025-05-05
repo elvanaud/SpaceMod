@@ -539,12 +539,12 @@ function remove_spacex_com(entity)
 end
 
 script.on_event(defines.events.on_built_entity, function(event)
-	if event.created_entity.name == "spacex-combinator" then
+	if event.entity.name == "spacex-combinator" then
 		debugp("Spacex combinator built")
 		global.spacex_com = global.spacex_com or {}
-		event.created_entity.operable = false
-		table.insert(global.spacex_com, {entity = event.created_entity})
-		get_spacex_cb(event.created_entity)
+		event.entity.operable = false
+		table.insert(global.spacex_com, {entity = event.entity})
+		get_spacex_cb(event.entity)
 	end
 	-- if event.entity.name == "spacex-combinator" then
 		-- debugp("inserting spacex combinator")
@@ -553,15 +553,15 @@ script.on_event(defines.events.on_built_entity, function(event)
 end)
 
 script.on_event(defines.events.on_robot_built_entity, function(event)
-	if event.created_entity.name == "spacex-combinator" then
+	if event.entity.name == "spacex-combinator" then
 		debugp("Spacex combinator built")
 		global.spacex_com = global.spacex_com or {}
-		event.created_entity.operable = false
-		table.insert(global.spacex_com, {entity = event.created_entity})
-		get_spacex_cb(event.created_entity)
+		event.entity.operable = false
+		table.insert(global.spacex_com, {entity = event.entity})
+		get_spacex_cb(event.entity)
 	end
-	-- if event.created_entity.name == "spacex-combinator" then
-		-- table.insert(global.spacex_com, {entity = event.created_entity})	
+	-- if event.entity.name == "spacex-combinator" then
+		-- table.insert(global.spacex_com, {entity = event.entity})	
 	-- end
 end)
 
@@ -784,10 +784,10 @@ script.on_init(function()
 end)
 
 -- script.on_event(defines.events.on_built_entity, function(event)
-	-- if event.created_entity.name == "spacex-combinator" then
+	-- if event.entity.name == "spacex-combinator" then
 		-- debugp("Spacex combinator built")
-		-- event.created_entity.operable = false
-		-- get_spacex_cb(event.created_entity)
+		-- event.entity.operable = false
+		-- get_spacex_cb(event.entity)
 	-- end
 -- end)
 
