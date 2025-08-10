@@ -178,7 +178,7 @@ end
 
 data:extend(
 {
-    generate_constant_combinator
+    generate_constant_combinator(
   {
     type = "constant-combinator",
     name = "spacex-combinator",
@@ -213,7 +213,5 @@ data:extend(
     },
 
     circuit_wire_max_distance = 9
-  },
- 
+  }),
 })
-

@@ -4,46 +4,44 @@ local mod_gui = require ("mod-gui")
 
 MOD_NAME = "SpaceMod"
 
-global = global or {}
-
-if global.launchMult == nil then
-
-	global.launchProfile = settings.startup["SpaceX-launch-profile"].value
-	if global.launchProfile == "Classic" then
-		global.launchMult = 1
-	elseif global.launchProfile == "Launch Mania(x5)" then
-		global.launchMult = 5
-	elseif global.launchProfile == "Launch Meglo-mania(x25)" then
-		global.launchMult = 25
-	else
-		global.launchMult = 1
-	end
-
-end
-	
-local launchMult = global.launchMult
-spaceshiprequirements = {
-   satellite = 7 * launchMult,
-   drydockstructure = 10 * launchMult,
-   drydockcommand = 2 * launchMult,
-   shipcasings = 10 * launchMult,
-   shipthrusters = 4 * launchMult,
-   shiptprotectionfield = 1 * launchMult,
-   shipfusionreactor = 1 * launchMult,
-   shipfuelcells = 2 * launchMult,
-   shiphabitation = 1 * launchMult,
-   shiplifesupport = 1 * launchMult,
-   shipastrometrics = 1 * launchMult,
-   shipcommand = 1 * launchMult,
-   shipftldrive = 1 * launchMult
-   }
+--global = global or {}
 
 local function glob_init()
-
-  global = global or {}
-  global.requirements = spaceshiprequirements
-  if global.launches == nil then
-    global.launches = {
+  storage = storage or {}
+  if storage.launchMult == nil then
+		storage.launchProfile = settings.startup["SpaceX-launch-profile"].value
+		if storage.launchProfile == "Classic" then
+			storage.launchMult = 1
+		elseif storage.launchProfile == "Launch Mania(x5)" then
+			storage.launchMult = 5
+		elseif storage.launchProfile == "Launch Meglo-mania(x25)" then
+			storage.launchMult = 25
+		else
+			storage.launchMult = 1
+		end
+	
+	end
+	
+	local launchMult = storage.launchMult
+	spaceshiprequirements = {
+	   satellite = 7 * launchMult,
+	   drydockstructure = 10 * launchMult,
+	   drydockcommand = 2 * launchMult,
+	   shipcasings = 10 * launchMult,
+	   shipthrusters = 4 * launchMult,
+	   shiptprotectionfield = 1 * launchMult,
+	   shipfusionreactor = 1 * launchMult,
+	   shipfuelcells = 2 * launchMult,
+	   shiphabitation = 1 * launchMult,
+	   shiplifesupport = 1 * launchMult,
+	   shipastrometrics = 1 * launchMult,
+	   shipcommand = 1 * launchMult,
+	   shipftldrive = 1 * launchMult
+	   }
+   
+  storage.requirements = spaceshiprequirements
+  if storage.launches == nil then
+    storage.launches = {
       satellite = 0,
       drydockstructure = 0,
       drydockcommand = 0,
@@ -107,9 +105,9 @@ function gui_open_frame(player)
     -- Now we can build the GUI.
 	
 	-- Launch history, if any
-	if global.spacex == nil then
-	elseif global.spacex > 0 then 
-		local ltext = "Interstellar Launches: " .. global.spacex
+	if storage.spacex == nil then
+	elseif storage.spacex > 0 then 
+		local ltext = "Interstellar Launches: " .. storage.spacex
 		local launch = frame.add{type = "table", name = "launch_info", column_count = 2, style = "SpaceMod_table_style"}
 		launch.add{type = "label", caption = ltext, style = "caption_label"}
 		launch.add{
@@ -126,11 +124,11 @@ function gui_open_frame(player)
 	satellite.style.column_alignments[2] = "right"	
  --   satellite.add{type = "label", caption = "-Satellites launched : "}
 	satellite.add{type = "label", caption = {"SpaceX-Progress.satellites"} }
-	satellite.add{type = "label", caption = " : " .. global.launches.satellite .. "/" .. global.requirements.satellite}
+	satellite.add{type = "label", caption = " : " .. storage.launches.satellite .. "/" .. storage.requirements.satellite}
 	
 
 	-- Test for satellite network established condition
-	if global.launches.satellite < global.requirements.satellite then
+	if storage.launches.satellite < storage.requirements.satellite then
 	  return
 	end
 
@@ -140,14 +138,14 @@ function gui_open_frame(player)
 	drydock.style.column_alignments[2] = "right"
 --	drydock.add{type = "label", caption = "-Drydock Structure Component : "}
 	drydock.add{type = "label", caption = {"SpaceX-Progress.dsc"} }	
-	drydock.add{type = "label", caption = " : " .. global.launches.drydockstructure .. "/" .. global.requirements.drydockstructure}
+	drydock.add{type = "label", caption = " : " .. storage.launches.drydockstructure .. "/" .. storage.requirements.drydockstructure}
 --	drydock.add{type = "label", caption = "-Drydock Assembly Component : "}
 	drydock.add{type = "label", caption = {"SpaceX-Progress.dac"} }
-	drydock.add{type = "label", caption = " : " .. global.launches.drydockcommand .. "/" .. global.requirements.drydockcommand}
+	drydock.add{type = "label", caption = " : " .. storage.launches.drydockcommand .. "/" .. storage.requirements.drydockcommand}
 	
 	-- Test for drydock built condition
-	if (global.launches.drydockstructure < global.requirements.drydockstructure or 
-		global.launches.drydockcommand < global.requirements.drydockcommand) then
+	if (storage.launches.drydockstructure < storage.requirements.drydockstructure or 
+		storage.launches.drydockcommand < storage.requirements.drydockcommand) then
 		return
 	end
 	
@@ -156,34 +154,34 @@ function gui_open_frame(player)
 	gui_ship.style.column_alignments[2] = "right"
 --	gui_ship.add{type = "label", caption = "-Protection Field...... : "}
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.protection"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shiptprotectionfield .. "/" .. global.requirements.shiptprotectionfield}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shiptprotectionfield .. "/" .. storage.requirements.shiptprotectionfield}
 --	gui_ship.add{type = "label", caption = "-Fusion Reactor........ : "}
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.fusion"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shipfusionreactor .. "/" .. global.requirements.shipfusionreactor }
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shipfusionreactor .. "/" .. storage.requirements.shipfusionreactor }
 --	gui_ship.add{type = "label", caption = "-Habitation............... : "}	
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.habitation"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shiphabitation .. "/" .. global.requirements.shiphabitation}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shiphabitation .. "/" .. storage.requirements.shiphabitation}
 --	gui_ship.add{type = "label", caption = "-Life Support........... : "}	
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.life"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shiplifesupport .. "/" .. global.requirements.shiplifesupport}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shiplifesupport .. "/" .. storage.requirements.shiplifesupport}
 --	gui_ship.add{type = "label", caption = "-Astrometrics.......... : "}	
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.astro"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shipastrometrics .. "/" .. global.requirements.shipastrometrics}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shipastrometrics .. "/" .. storage.requirements.shipastrometrics}
 --	gui_ship.add{type = "label", caption = "-Command................ : "}	
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.command"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shipcommand .. "/" .. global.requirements.shipcommand}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shipcommand .. "/" .. storage.requirements.shipcommand}
 --	gui_ship.add{type = "label", caption = "-Fuel Cells............... : "}	
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.fuel"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shipfuelcells .. "/" .. global.requirements.shipfuelcells}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shipfuelcells .. "/" .. storage.requirements.shipfuelcells}
 --	gui_ship.add{type = "label", caption = "-Thrusters.............. : "}	
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.thrusters"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shipthrusters .. "/" .. global.requirements.shipthrusters}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shipthrusters .. "/" .. storage.requirements.shipthrusters}
 --	gui_ship.add{type = "label", caption = "-Hull components.. : "}	
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.hull"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shipcasings .. "/" .. global.requirements.shipcasings}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shipcasings .. "/" .. storage.requirements.shipcasings}
 --	gui_ship.add{type = "label", caption = "-FTL drive............. : "}
 	gui_ship.add{type = "label", caption = {"SpaceX-Progress.ftl"} }
-	gui_ship.add{type = "label", caption = " : " .. global.launches.shipftldrive .. "/" .. global.requirements.shipftldrive}
+	gui_ship.add{type = "label", caption = " : " .. storage.launches.shipftldrive .. "/" .. storage.requirements.shipftldrive}
 	
 end
 
@@ -199,12 +197,12 @@ script.on_configuration_changed( function(event)
 
   if changed then
 	debugp("Processing mod change")
-	global.spacex_com = global.spacex_com or {}
+	storage.spacex_com = storage.spacex_com or {}
 	for _,surface in pairs(game.surfaces) do
 		debugp("Surface found")
 		for _,spacexCom in pairs(surface.find_entities_filtered{type="constant-combinator", name="spacex-combinator"}) do
 			debugp("Found an old spacex combinator")
-			table.insert(global.spacex_com, {entity = spacexCom})	
+			table.insert(storage.spacex_com, {entity = spacexCom})	
 		end
 	end   
 		local status,err = pcall(function()
@@ -269,7 +267,7 @@ local function gui_open_spacex_launch_gui(player)
 	if player.admin then
 	local sctable = gui_spacex.add{type = "table", name = "spacex_launch_table", column_count = 2, style = "SpaceMod_table_style"}
 	sctable.style.minimal_width = 400
-	sctable.style.horizontally_stretchable = "on"
+	sctable.style.horizontally_stretchable = true
 	sctable.style.column_alignments[2] = "right"
 		sctable.add{
             type = "button",
@@ -297,7 +295,7 @@ local function gui_open_spacex_launch_gui(player)
 end	
 
 local function get_launch_log()
-	global.launch_log = global.launch_log or {}
+	storage.launch_log = storage.launch_log or {}
 	local seconds = 60
 	local minutes = 60 * seconds
 	local hours = 60 * minutes
@@ -321,7 +319,7 @@ local function gui_log_open(player)
 	local scroll = llog.add{type = "scroll-pane", name = "scroll"}
 	scroll.style.maximal_height = 800	
 	local logtable = scroll.add{type = "table", name = "spacex_log_table", column_count = 2, style = "SpaceMod_table_style"}
-	for i,launch in pairs(global.launch_log) do
+	for i,launch in pairs(storage.launch_log) do
 		logtable.add{type = "label", caption = "#" .. i .. "- " .. launch.log, style = "Launch_label_style"}
 		if player.admin then
 			logtable.add{type = "textfield", name = "logdetail" .. i, enabled = true, text = launch.detail}
@@ -338,78 +336,59 @@ script.on_event(defines.events.on_gui_text_changed, function(event)
 	if string.find(element.name, "logdetail") then
 		if player.admin then
 			local cur_log = tonumber(string.match(element.name, "%d+"))	
-			global.launch_log[cur_log].detail = element.text
+			storage.launch_log[cur_log].detail = element.text
 		end
 	end
 		
 end)
 
+function createCombinatorFilter(name, amount)
+  return {
+	value = {
+		type = name == "signal-S" and "virtual" or "item",
+		name = name,
+		quality = "normal",
+		comparator = "="
+	},
+	min = amount,
+	max = amount
+  }
+end
+
 function get_spacex_cb(entity)
 	if entity.valid == true then
 	local cb = entity.get_or_create_control_behavior()
 	-- cb.parameters = cb.parameters or {}
-	local satellite = global.requirements.satellite - global.launches.satellite
-	local dsc = global.requirements.drydockstructure - global.launches.drydockstructure
-	local dac = global.requirements.drydockcommand - global.launches.drydockcommand
-	local fusion = global.requirements.shipfusionreactor - global.launches.shipfusionreactor
-	local fuelcell = global.requirements.shipfuelcells - global.launches.shipfuelcells
-	local hull = global.requirements.shipcasings - global.launches.shipcasings
-	local shield = global.requirements.shiptprotectionfield - global.launches.shiptprotectionfield
-	local thruster = global.requirements.shipthrusters - global.launches.shipthrusters
-	local habitation = global.requirements.shiphabitation - global.launches.shiphabitation
-	local life = global.requirements.shiplifesupport - global.launches.shiplifesupport
-	local command = global.requirements.shipcommand - global.launches.shipcommand
-	local astro = global.requirements.shipastrometrics - global.launches.shipastrometrics
-	local ftl = global.requirements.shipftldrive - global.launches.shipftldrive
+	local satellite = storage.requirements.satellite - storage.launches.satellite
+	local dsc = storage.requirements.drydockstructure - storage.launches.drydockstructure
+	local dac = storage.requirements.drydockcommand - storage.launches.drydockcommand
+	local fusion = storage.requirements.shipfusionreactor - storage.launches.shipfusionreactor
+	local fuelcell = storage.requirements.shipfuelcells - storage.launches.shipfuelcells
+	local hull = storage.requirements.shipcasings - storage.launches.shipcasings
+	local shield = storage.requirements.shiptprotectionfield - storage.launches.shiptprotectionfield
+	local thruster = storage.requirements.shipthrusters - storage.launches.shipthrusters
+	local habitation = storage.requirements.shiphabitation - storage.launches.shiphabitation
+	local life = storage.requirements.shiplifesupport - storage.launches.shiplifesupport
+	local command = storage.requirements.shipcommand - storage.launches.shipcommand
+	local astro = storage.requirements.shipastrometrics - storage.launches.shipastrometrics
+	local ftl = storage.requirements.shipftldrive - storage.launches.shipftldrive
 	local params = nil
 	
+	cb.remove_section(1)
 	if satellite > 0 then
 		debugp("spacex satellite")
-		cb.parameters = {
-			{
-				signal = {
-					type = "item",
-					name = "satellite"
-				},
-				count = satellite,
-				index = 1
-			},
-			{
-				signal = {
-					type = "virtual",
-					name = "signal-S"
-				},
-				count = 1,
-				index = 2
-			}
+		section = cb.add_section()
+		section.filters = {
+			createCombinatorFilter("satellite", satellite),
+			createCombinatorFilter("signal-S", 1)
 		}	
 	elseif (dsc > 0) or (dac > 0) then
 		debugp("spacex drydock")
-		cb.parameters = {
-			{
-				signal = {
-					type = "item",
-					name = "drydock-structural"
-				},
-				count = dsc,
-				index = 1
-			},
-			{
-				signal = {
-					type = "item",
-					name = "drydock-assembly"
-				},
-				count = dac,
-				index = 2
-			},
-			{
-				signal = {
-					type = "virtual",
-					name = "signal-S"
-				},
-				count = 2,
-				index = 3
-			}
+		section = cb.add_section()
+		section.filters = {
+			createCombinatorFilter("drydock-structural", dsc),
+			createCombinatorFilter("drydock-assembly", dac),
+			createCombinatorFilter("signal-S", 2),
 		}		
 	elseif (fusion > 0) or
 			(fuelcell > 0) or
@@ -422,98 +401,22 @@ function get_spacex_cb(entity)
 			(astro > 0) or
 			(ftl > 0) then
 		debugp("spacex endphase")
-		cb.parameters = {
-			{
-				signal = {
-					type = "item",
-					name = "fusion-reactor"
-				},
-				count = fusion,
-				index = 1
-			},
-			{
-				signal = {
-					type = "item",
-					name = "hull-component"
-				},
-				count = hull,
-				index = 2
-			},
-			{
-				signal = {
-					type = "item",
-					name = "protection-field"
-				},
-				count = shield,
-				index = 3
-			},
-			{
-				signal = {
-					type = "item",
-					name = "space-thruster"
-				},
-				count = thruster,
-				index = 4
-			},
-			{
-				signal = {
-					type = "item",
-					name = "fuel-cell"
-				},
-				count = fuelcell,
-				index = 5
-			},
-			{
-				signal = {
-					type = "item",
-					name = "habitation"
-				},
-				count = habitation,
-				index = 6
-			},
-			{
-				signal = {
-					type = "item",
-					name = "life-support"
-				},
-				count = life,
-				index = 7
-			},
-			{
-				signal = {
-					type = "item",
-					name = "command"
-				},
-				count = command,
-				index = 8
-			},
-			{
-				signal = {
-					type = "item",
-					name = "astrometrics"
-				},
-				count = astro,
-				index = 9
-			},
-			{
-				signal = {
-					type = "item",
-					name = "ftl-drive"
-				},
-				count = ftl,
-				index = 10
-			},
-			{
-				signal = {
-					type = "virtual",
-					name = "signal-S"
-				},
-				count = 3,
-				index = 11
-			}
+		section = cb.add_section()
+		section.filters = {
+			createCombinatorFilter("fusion-reactor", fusion),
+			createCombinatorFilter("hull-component", hull),
+			createCombinatorFilter("protection-field", shield),
+			createCombinatorFilter("space-thruster", thruster),
+			createCombinatorFilter("fuel-cell", fuelcell),
+			createCombinatorFilter("habitation", habitation),
+			createCombinatorFilter("life-support", life),
+			createCombinatorFilter("command", command),
+			createCombinatorFilter("astrometrics", astro),
+			createCombinatorFilter("ftl-drive", ftl),
+			createCombinatorFilter("signal-S", 3)
 		}	
 	else
-		cb.parameters = {}
+		--cb.parameters = {}
 	end
 		
 			-- cb.parameters = {parameters = {
@@ -530,9 +433,9 @@ function get_spacex_cb(entity)
 end
 
 function remove_spacex_com(entity)
-	for i, coms in ipairs(global.spacex_com) do
+	for i, coms in ipairs(storage.spacex_com) do
 		if coms.entity == entity then
-			table.remove(global.spacex_com, i)
+			table.remove(storage.spacex_com, i)
 			break
 		end
 	end	
@@ -541,27 +444,27 @@ end
 script.on_event(defines.events.on_built_entity, function(event)
 	if event.entity.name == "spacex-combinator" then
 		debugp("Spacex combinator built")
-		global.spacex_com = global.spacex_com or {}
+		storage.spacex_com = storage.spacex_com or {}
 		event.entity.operable = false
-		table.insert(global.spacex_com, {entity = event.entity})
+		table.insert(storage.spacex_com, {entity = event.entity})
 		get_spacex_cb(event.entity)
 	end
 	-- if event.entity.name == "spacex-combinator" then
 		-- debugp("inserting spacex combinator")
-		-- table.insert(global.spacex_com, {entity = event.entity})
+		-- table.insert(storage.spacex_com, {entity = event.entity})
 	-- end
 end)
 
 script.on_event(defines.events.on_robot_built_entity, function(event)
 	if event.entity.name == "spacex-combinator" then
 		debugp("Spacex combinator built")
-		global.spacex_com = global.spacex_com or {}
+		storage.spacex_com = storage.spacex_com or {}
 		event.entity.operable = false
-		table.insert(global.spacex_com, {entity = event.entity})
+		table.insert(storage.spacex_com, {entity = event.entity})
 		get_spacex_cb(event.entity)
 	end
 	-- if event.entity.name == "spacex-combinator" then
-		-- table.insert(global.spacex_com, {entity = event.entity})	
+		-- table.insert(storage.spacex_com, {entity = event.entity})	
 	-- end
 end)
 
@@ -585,24 +488,24 @@ end)
 
 local function updateSpacexCombinators(surface)
 --	for _,spacexCom in pairs(surface.find_entities_filtered{type="constant-combinator", name="spacex-combinator"}) do
-	global.spacex_com = global.spacex_com or {}
-	if global.spacex_com == {} then return end
-	for _,spacexCom in pairs(global.spacex_com) do
+	storage.spacex_com = storage.spacex_com or {}
+	if storage.spacex_com == {} then return end
+	for _,spacexCom in pairs(storage.spacex_com) do
 		debugp("spacex combinator found")
 		get_spacex_cb(spacexCom.entity)
 	end
 end
 
 local function spacex_continue(surface)
-	global.launches = nil
+	storage.launches = nil
 	glob_init()
 	updateSpacexCombinators(surface)
-	if global.spacex == nil then global.spacex = 0 end
-	global.spacex = global.spacex + 1
-	global.launch_log = global.launch_log or {}
+	if storage.spacex == nil then storage.spacex = 0 end
+	storage.spacex = storage.spacex + 1
+	storage.launch_log = storage.launch_log or {}
 	local launch_log = {log = get_launch_log(), detail = "?"}
 	-- launch_log.detail = "?"
-	table.insert(global.launch_log, launch_log )
+	table.insert(storage.launch_log, launch_log )
 end	
 
 script.on_event(defines.events.on_gui_click, function(event) 
@@ -636,15 +539,15 @@ script.on_event(defines.events.on_gui_click, function(event)
 			gui_open_spacex_launch_gui(player)
 		end
 		spacex_continue(player.surface, gui)
---[[ 		global.launches = nil
+--[[ 		storage.launches = nil
 		glob_init()
 		updateSpacexCombinators(player.surface)
-		if global.spacex == nil then global.spacex = 0 end
-		global.spacex = global.spacex + 1
-		global.launch_log = global.launch_log or {}
+		if storage.spacex == nil then storage.spacex = 0 end
+		storage.spacex = storage.spacex + 1
+		storage.launch_log = storage.launch_log or {}
 		local launch_log = {log = get_launch_log(), detail = "?"}
 		-- launch_log.detail = "?"
-		table.insert(global.launch_log, launch_log ) ]]
+		table.insert(storage.launch_log, launch_log ) ]]
 		if frame then
 			frame.destroy()
 		end
@@ -677,7 +580,7 @@ script.on_event(defines.events.on_gui_click, function(event)
 			game.set_game_state{game_finished=true, player_won=true, can_continue=true, victorious_force=force}
 		end
 
-		global.finished = true
+		storage.finished = true
 		return
 	end	
 
@@ -800,10 +703,10 @@ script.on_event(defines.events.on_rocket_launched, function(event)
 	remote.call("silo_script","set_finish_on_launch", false)
   end)
   local force = event.rocket.force
-  if event.rocket.get_item_count("satellite") > 0 then
-    if global.launches.satellite < global.requirements.satellite then
-	  global.launches.satellite = global.launches.satellite + 1	
-		if global.launches.satellite == global.requirements.satellite then
+  if event.rocket.cargo_pod.get_item_count("satellite") > 0 then
+    if storage.launches.satellite < storage.requirements.satellite then
+	  storage.launches.satellite = storage.launches.satellite + 1	
+		if storage.launches.satellite == storage.requirements.satellite then
 
 			for _, player in pairs(game.players) do
 				player.print({"satellite-network-complete-msg"}) 
@@ -833,25 +736,25 @@ script.on_event(defines.events.on_rocket_launched, function(event)
 	return
   end
   
-	if event.rocket.get_item_count("drydock-structural") > 0 then
-		if global.launches.drydockstructure < global.requirements.drydockstructure then
-			global.launches.drydockstructure = global.launches.drydockstructure + 1
+	if event.rocket.cargo_pod.get_item_count("drydock-structural") > 0 then
+		if storage.launches.drydockstructure < storage.requirements.drydockstructure then
+			storage.launches.drydockstructure = storage.launches.drydockstructure + 1
 		end
 
 	end
   
-	if event.rocket.get_item_count("drydock-assembly") > 0 then
-		if global.launches.drydockcommand < global.requirements.drydockcommand then
-			global.launches.drydockcommand = global.launches.drydockcommand + 1
+	if event.rocket.cargo_pod.get_item_count("drydock-assembly") > 0 then
+		if storage.launches.drydockcommand < storage.requirements.drydockcommand then
+			storage.launches.drydockcommand = storage.launches.drydockcommand + 1
 		end
 
 	end  
 
---	local condition = (ship == nil) and (global.launches.drydockstructure = global.requirements.drydockstructure) and (global.launches.drydockcommand = globallaunches.drydockcommand)			
+--	local condition = (ship == nil) and (storage.launches.drydockstructure = storage.requirements.drydockstructure) and (storage.launches.drydockcommand = globallaunches.drydockcommand)			
 						
-	if ((event.rocket.get_item_count("drydock-structural") > 0 or event.rocket.get_item_count("drydock-assembly") > 0) and
-		global.launches.drydockstructure == global.requirements.drydockstructure and
-		global.launches.drydockcommand == global.requirements.drydockcommand) then
+	if ((event.rocket.cargo_pod.get_item_count("drydock-structural") > 0 or event.rocket.cargo_pod.get_item_count("drydock-assembly") > 0) and
+		storage.launches.drydockstructure == storage.requirements.drydockstructure and
+		storage.launches.drydockcommand == storage.requirements.drydockcommand) then
 		for _, player in pairs(game.players) do
 			player.print({"drydock-complete-msg"}) 
 			if settings.global['SpaceX-no-popup'].value == false then
@@ -861,89 +764,89 @@ script.on_event(defines.events.on_rocket_launched, function(event)
 		end
 	end
 
-	if event.rocket.get_item_count("fusion-reactor") > 0 then
-		if global.launches.shipfusionreactor < global.requirements.shipfusionreactor then
-			global.launches.shipfusionreactor = global.launches.shipfusionreactor + 1
+	if event.rocket.cargo_pod.get_item_count("fusion-reactor") > 0 then
+		if storage.launches.shipfusionreactor < storage.requirements.shipfusionreactor then
+			storage.launches.shipfusionreactor = storage.launches.shipfusionreactor + 1
 		end
 
 	end  
 
-	if event.rocket.get_item_count("fuel-cell") > 0 then
-		if global.launches.shipfuelcells < global.requirements.shipfuelcells then
-			global.launches.shipfuelcells = global.launches.shipfuelcells + 1
+	if event.rocket.cargo_pod.get_item_count("fuel-cell") > 0 then
+		if storage.launches.shipfuelcells < storage.requirements.shipfuelcells then
+			storage.launches.shipfuelcells = storage.launches.shipfuelcells + 1
 		end
 
 	end 	
 
-	if event.rocket.get_item_count("hull-component") > 0 then
-		if global.launches.shipcasings < global.requirements.shipcasings then
-			global.launches.shipcasings = global.launches.shipcasings + 1
+	if event.rocket.cargo_pod.get_item_count("hull-component") > 0 then
+		if storage.launches.shipcasings < storage.requirements.shipcasings then
+			storage.launches.shipcasings = storage.launches.shipcasings + 1
 		end
 
 	end 
 
-	if event.rocket.get_item_count("protection-field") > 0 then
-		if global.launches.shiptprotectionfield < global.requirements.shiptprotectionfield then
-			global.launches.shiptprotectionfield = global.launches.shiptprotectionfield + 1
+	if event.rocket.cargo_pod.get_item_count("protection-field") > 0 then
+		if storage.launches.shiptprotectionfield < storage.requirements.shiptprotectionfield then
+			storage.launches.shiptprotectionfield = storage.launches.shiptprotectionfield + 1
 		end
 
 	end 
 
-	if event.rocket.get_item_count("space-thruster") > 0 then
-		if global.launches.shipthrusters < global.requirements.shipthrusters then
-			global.launches.shipthrusters = global.launches.shipthrusters + 1
+	if event.rocket.cargo_pod.get_item_count("space-thruster") > 0 then
+		if storage.launches.shipthrusters < storage.requirements.shipthrusters then
+			storage.launches.shipthrusters = storage.launches.shipthrusters + 1
 		end
 
 	end 
 
-	if event.rocket.get_item_count("habitation") > 0 then
-		if global.launches.shiphabitation < global.requirements.shiphabitation then
-			global.launches.shiphabitation = global.launches.shiphabitation + 1
+	if event.rocket.cargo_pod.get_item_count("habitation") > 0 then
+		if storage.launches.shiphabitation < storage.requirements.shiphabitation then
+			storage.launches.shiphabitation = storage.launches.shiphabitation + 1
 		end
 
 	end
 
-	if event.rocket.get_item_count("life-support") > 0 then
-		if global.launches.shiplifesupport < global.requirements.shiplifesupport then
-			global.launches.shiplifesupport = global.launches.shiplifesupport + 1
+	if event.rocket.cargo_pod.get_item_count("life-support") > 0 then
+		if storage.launches.shiplifesupport < storage.requirements.shiplifesupport then
+			storage.launches.shiplifesupport = storage.launches.shiplifesupport + 1
 		end
 
 	end  
 
-	if event.rocket.get_item_count("command") > 0 then
-		if global.launches.shipcommand < global.requirements.shipcommand then
-			global.launches.shipcommand = global.launches.shipcommand + 1
+	if event.rocket.cargo_pod.get_item_count("command") > 0 then
+		if storage.launches.shipcommand < storage.requirements.shipcommand then
+			storage.launches.shipcommand = storage.launches.shipcommand + 1
 		end
 
 	end 
 
-	if event.rocket.get_item_count("astrometrics") > 0 then
-		if global.launches.shipastrometrics < global.requirements.shipastrometrics then
-			global.launches.shipastrometrics = global.launches.shipastrometrics + 1
+	if event.rocket.cargo_pod.get_item_count("astrometrics") > 0 then
+		if storage.launches.shipastrometrics < storage.requirements.shipastrometrics then
+			storage.launches.shipastrometrics = storage.launches.shipastrometrics + 1
 		end
 
 	end 
 
-	if event.rocket.get_item_count("ftl-drive") > 0 then
-		if global.launches.shipftldrive < global.requirements.shipftldrive then
-			global.launches.shipftldrive = global.launches.shipftldrive + 1
+	if event.rocket.cargo_pod.get_item_count("ftl-drive") > 0 then
+		if storage.launches.shipftldrive < storage.requirements.shipftldrive then
+			storage.launches.shipftldrive = storage.launches.shipftldrive + 1
 		end
 	end  
 
 	-- Test for victory condition
-	global.finished = global.finished or false
+	storage.finished = storage.finished or false
 	
-	if  global.launches.shipfusionreactor == global.requirements.shipfusionreactor and
-		global.launches.shipcasings == global.requirements.shipcasings and
-		global.launches.shiptprotectionfield == global.requirements.shiptprotectionfield and
-		global.launches.shipthrusters == global.requirements.shipthrusters and
-		global.launches.shiphabitation == global.requirements.shiphabitation and
-		global.launches.shiplifesupport == global.requirements.shiplifesupport and
-		global.launches.shipfuelcells == global.requirements.shipfuelcells and
-		global.launches.shipcommand == global.requirements.shipcommand and
-		global.launches.shipastrometrics == global.requirements.shipastrometrics and
-		global.launches.shipftldrive == global.requirements.shipftldrive and
-		global.finished == false then
+	if  storage.launches.shipfusionreactor == storage.requirements.shipfusionreactor and
+		storage.launches.shipcasings == storage.requirements.shipcasings and
+		storage.launches.shiptprotectionfield == storage.requirements.shiptprotectionfield and
+		storage.launches.shipthrusters == storage.requirements.shipthrusters and
+		storage.launches.shiphabitation == storage.requirements.shiphabitation and
+		storage.launches.shiplifesupport == storage.requirements.shiplifesupport and
+		storage.launches.shipfuelcells == storage.requirements.shipfuelcells and
+		storage.launches.shipcommand == storage.requirements.shipcommand and
+		storage.launches.shipastrometrics == storage.requirements.shipastrometrics and
+		storage.launches.shipftldrive == storage.requirements.shipftldrive and
+		storage.finished == false then
 		if settings.global['SpaceX-auto-continue'].value == false then
 			for _, player in pairs(game.players) do
 				player.print({"spaceship-complete-msg"})
@@ -953,7 +856,7 @@ script.on_event(defines.events.on_rocket_launched, function(event)
 			spacex_continue(event.rocket.surface)
 		end
 		-- game.set_game_state{game_finished=true, player_won=true, can_continue=true}
-		-- global.finished = true
+		-- storage.finished = true
 	end
 	for _, player in pairs(game.players) do
 		frame = mod_gui.get_frame_flow(player).space_progress_frame
@@ -968,11 +871,11 @@ script.on_event(defines.events.on_rocket_launched, function(event)
 end)
 
 commands.add_command("resetSpaceX", {"resetSpaceX_help"}, function(event)
-	global.finished = false
+	storage.finished = false
 end)
 
 commands.add_command("modlist", {"modlist_help"}, function(event)
-	for name, version in pairs(game.active_mods) do
+	for name, version in pairs(script.active_mods) do
 		game.player.print(name .. " version " .. version)
 	end
 end)
@@ -983,39 +886,39 @@ commands.add_command("spacex_settings", {"x_settings_help"}, function(event)
 end)
 
 commands.add_command("Get_log_file", {"get log file help"}, function(event)
-	game.write_file("spacex_log",serpent.block(global.launch_log),{comment=false})
+	helpers.write_file("spacex_log",serpent.block(storage.launch_log))--,{comment=false}) --TODO : what did this do ?
 end)
 
 commands.add_command("spacex_combinators", {"get spacex_combinator help"}, function(event)
-	game.write_file("spacex_combinator",serpent.block(global.spacex_com),{comment=false})
+	helpers.write_file("spacex_combinator",serpent.block(storage.spacex_com))--,{comment=false})
 end)
 
 --Cheat command
 --[[ commands.add_command("SpaceX_complete_launch_cycle", {"SpaceX_cheat_help"}, function(event)
-		global.launches.satellite = global.requirements.satellite
-		global.launches.drydockstructure = global.requirements.drydockstructure 
-		global.launches.drydockcommand = global.requirements.drydockcommand
-	    global.launches.shipfusionreactor = global.requirements.shipfusionreactor
-		global.launches.shipcasings = global.requirements.shipcasings 
-		global.launches.shiptprotectionfield = global.requirements.shiptprotectionfield 
-		global.launches.shipthrusters = global.requirements.shipthrusters 
-		global.launches.shiphabitation = global.requirements.shiphabitation 
-		global.launches.shiplifesupport = global.requirements.shiplifesupport 
-		global.launches.shipfuelcells = global.requirements.shipfuelcells
-		global.launches.shipcommand = global.requirements.shipcommand 
-		global.launches.shipastrometrics = global.requirements.shipastrometrics 
-		global.launches.shipftldrive = global.requirements.shipftldrive - 1
+		storage.launches.satellite = storage.requirements.satellite
+		storage.launches.drydockstructure = storage.requirements.drydockstructure 
+		storage.launches.drydockcommand = storage.requirements.drydockcommand
+	    storage.launches.shipfusionreactor = storage.requirements.shipfusionreactor
+		storage.launches.shipcasings = storage.requirements.shipcasings 
+		storage.launches.shiptprotectionfield = storage.requirements.shiptprotectionfield 
+		storage.launches.shipthrusters = storage.requirements.shipthrusters 
+		storage.launches.shiphabitation = storage.requirements.shiphabitation 
+		storage.launches.shiplifesupport = storage.requirements.shiplifesupport 
+		storage.launches.shipfuelcells = storage.requirements.shipfuelcells
+		storage.launches.shipcommand = storage.requirements.shipcommand 
+		storage.launches.shipastrometrics = storage.requirements.shipastrometrics 
+		storage.launches.shipftldrive = storage.requirements.shipftldrive - 1
 		updateSpacexCombinators(game.player.surface)
 end)
 
 commands.add_command("SpaceX_complete_satellite", {"SpaceX_cheat_sat_help"}, function(event)
-	global.launches.satellite = global.requirements.satellite - 1
+	storage.launches.satellite = storage.requirements.satellite - 1
 	updateSpacexCombinators(game.player.surface)
 end)
 
 commands.add_command("SpaceX_complete_drydock", {"SpaceX_cheat_dry_help"}, function(event)
-	global.launches.satellite = global.requirements.satellite
-	global.launches.drydockstructure = global.requirements.drydockstructure - 1
-	global.launches.drydockcommand = global.requirements.drydockcommand
+	storage.launches.satellite = storage.requirements.satellite
+	storage.launches.drydockstructure = storage.requirements.drydockstructure - 1
+	storage.launches.drydockcommand = storage.requirements.drydockcommand
 	updateSpacexCombinators(game.player.surface)
 end) ]]
